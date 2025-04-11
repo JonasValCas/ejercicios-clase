@@ -3,7 +3,26 @@
   "version": "1.0.0",
   "main": "ejercicio1.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ejercicio1": "nodemon ejercicio1.js",
+    "ejercicio2": "nodemon ejercicio2.js",
+    "ejercicio3": "nodemon ejercicio3.js",
+    "ejercicio4": "nodemon ejercicio4.js",
+    "ejercicio5": "nodemon ejercicio5.js",
+    "ejercicio6": "nodemon ejercicio6.js",
+    "ejercicio7": "nodemon ejercicio7.js",
+    "ejercicio8": "nodemon ejercicio8.js",
+    "ejercicio9": "nodemon ejercicio9.js",
+    "ejercicio10": "nodemon ejercicio10.js",
+    "ejercicio11": "nodemon ejercicio11.js",
+    "ejercicio12": "nodemon ejercicio12.js",
+    "ejercicio13": "nodemon ejercicio13.js",
+    "ejercicio14": "nodemon ejercicio14.js",
+    "ejercicio15": "nodemon ejercicio15.js",
+    "ejercicio16": "nodemon ejercicio16.js",
+    "ejercicio17": "nodemon ejercicio17.js",
+    "ejercicio18": "nodemon ejercicio18.js",
+    "ejercicio19": "nodemon ejercicio19.js",
+    "ejercicio20": "nodemon ejercicio20.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +34,8 @@
     "url": "https://github.com/JonasValCas/ejercicios-clase/issues"
   },
   "homepage": "https://github.com/JonasValCas/ejercicios-clase#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
