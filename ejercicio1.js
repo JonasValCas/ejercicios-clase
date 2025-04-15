@@ -1,10 +1,11 @@
 function sumarArray(numeros) {
-    let suma = 0;
-    for (let i = 0; i < numeros.length; i++) {
-      suma += numeros[i];
-    }
-    return suma;
+  let suma = 0;
+  for (let num of numeros) {
+      suma += num;
   }
-  
-  const miArray = [1, 2, 3, 4, 5];
-  console.log(sumarArray(miArray)); 
+  return suma;
+}
+
+// Ejemplo de uso:
+const numeros = [1, 2, 3, 4, 5];
+console.log("La suma es:", sumarArray(numeros));

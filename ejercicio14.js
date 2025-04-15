@@ -1,31 +1,39 @@
 const readline = require('readline');
 
-// Configuramos la interfaz de readline para leer desde la terminal
 const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+    input: process.stdin,
+    output: process.stdout
 });
 
-function pedirNumeroMayorQueCero() {
-  let numero;
+function pedirNumero() {
+    let numero;
 
-  // Usamos un bucle while para seguir pidiendo el número hasta que sea válido
-  function pedir() {
-    rl.question("Ingresa un número mayor que 0: ", function(input) {
-      numero = parseInt(input);
+    // Creamos una promesa para manejar la entrada asincrónica
+    function pedirInput() {
+        return new Promise((resolve) => {
+            rl.question("Ingresa un número mayor que 0: ", (input) => {
+                resolve(input);  // Resolvemos la promesa con el valor ingresado
+            });
+        });
+    }
 
-      // Verificamos si el número es válido (mayor que 0)
-      if (isNaN(numero) || numero <= 0) {
-        console.log("Por favor, ingresa un número válido mayor que 0.");
-        pedir(); // Pedir nuevamente si no es válido
-      } else {
-        console.log(`El número ingresado es: ${numero}`);
-        rl.close(); // Cerrar la interfaz después de recibir un número válido
-      }
-    });
-  }
+    // Hacemos un ciclo para asegurarnos de que el número es mayor que 0
+    async function ciclo() {
+        do {
+            let input = await pedirInput();  // Esperamos a que el usuario ingrese el número
+            numero = parseInt(input);
 
-  pedir(); // Llamamos a la función para empezar a pedir el número
+            if (isNaN(numero) || numero <= 0) {
+                console.log("❌ Eso no es un número válido o es menor o igual a 0. Intenta de nuevo.");
+            } else {
+                console.log(`✅ ¡Número válido! El número ingresado es ${numero}`);
+            }
+        } while (isNaN(numero) || numero <= 0);  // Continuamos si el número no es válido o es menor que 0
+
+        rl.close();  // Cerramos readline cuando el número es válido
+    }
+
+    ciclo();  // Llamamos a la función ciclo para que empiece el proceso
 }
 
-pedirNumeroMayorQueCero();
+pedirNumero();

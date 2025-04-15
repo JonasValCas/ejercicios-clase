@@ -1,34 +1,39 @@
 const readline = require('readline');
 
-// Configuramos la interfaz de readline para leer desde la terminal
 const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+    input: process.stdin,
+    output: process.stdout
 });
 
-function adivinarNumero() {
-  const numeroAleatorio = Math.floor(Math.random() * 10) + 1; // Generar número aleatorio entre 1 y 10
-  let intento;
-
-  // Iniciar un bucle para los intentos
-  function pedirIntento() {
-    rl.question("Adivina el número entre 1 y 10: ", function(input) {
-      intento = parseInt(input);
-
-      if (isNaN(intento)) {
-        console.log("Por favor, ingresa un número válido.");
-        pedirIntento(); // Volver a pedir el número si la entrada no es válida
-      } else if (intento === numeroAleatorio) {
-        console.log("¡Felicidades! Adivinaste el número.");
-        rl.close(); // Salir del bucle y cerrar la interfaz de readline
-      } else {
-        console.log("Intenta nuevamente.");
-        pedirIntento(); // Volver a pedir el número si no se adivinó
-      }
+function preguntarAsync(pregunta) {
+    return new Promise((resolve) => {
+        rl.question(pregunta, (respuesta) => {
+            resolve(respuesta);
+        });
     });
-  }
-
-  pedirIntento();
 }
 
-adivinarNumero();
+async function adivinaNumero() {
+    const numeroSecreto = Math.floor(Math.random() * 10) + 1;
+    let adivinaste = false;
+
+    console.log("🎲 Adivina el número del 1 al 10");
+
+    while (!adivinaste) {
+        const input = await preguntarAsync("Tu intento: ");
+        const intento = parseInt(input);
+
+        if (isNaN(intento)) {
+            console.log("⛔ Eso no es un número válido.");
+        } else if (intento === numeroSecreto) {
+            console.log(`🎉 ¡Correcto! El número era ${numeroSecreto}.`);
+            adivinaste = true;
+        } else {
+            console.log("❌ Incorrecto, intenta de nuevo...");
+        }
+    }
+
+    rl.close();
+}
+
+adivinaNumero();

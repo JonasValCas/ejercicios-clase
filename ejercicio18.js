@@ -1,34 +1,40 @@
 const readline = require('readline');
 
 const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+    input: process.stdin,
+    output: process.stdout
 });
 
-function sumarNumeros() {
-  let suma = 0;
-  let numero;
+let suma = 0;  // Inicializamos la variable para la suma
 
-  // Función recursiva para sumar números hasta que el usuario ingrese 0
-  function pedirNumero() {
-    rl.question("Ingresa un número para sumar (ingresa 0 para detenerte): ", function(input) {
-      numero = parseInt(input);
-
-      // Verificar si el número es válido
-      if (isNaN(numero)) {
-        console.log("Por favor, ingresa un número válido.");
-        pedirNumero(); // Volver a pedir si el número no es válido
-      } else if (numero !== 0) {
-        suma += numero; // Sumar el número si no es 0
-        pedirNumero(); // Seguir pidiendo más números
-      } else {
-        console.log("La suma total es: " + suma); // Mostrar el resultado
-        rl.close(); // Cerrar la interfaz de readline
-      }
+// Función para pedir un número al usuario
+function pedirNumero() {
+    return new Promise((resolve) => {
+        rl.question('Ingresa un número (o 0 para terminar): ', (numero) => {
+            resolve(parseInt(numero));  // Convertimos el input a número
+        });
     });
-  }
-
-  pedirNumero(); // Llamar a la función para empezar a pedir los números
 }
 
-sumarNumeros(); // Ejecutar la función
+// Función para ejecutar la suma
+async function sumarNumeros() {
+    let numero;
+
+    // Usamos while para seguir pidiendo números hasta que ingrese 0
+    while (true) {
+        numero = await pedirNumero();  // Pedir un número
+
+        if (numero === 0) {
+            console.log('✔️ El proceso ha terminado.');
+            break;  // Salir del bucle si el usuario ingresa 0
+        }
+
+        suma += numero;  // Sumar el número ingresado
+        console.log(`La suma actual es: ${suma}`);
+    }
+
+    console.log(`La suma total es: ${suma}`);
+    rl.close();  // Cerrar la interfaz de readline
+}
+
+sumarNumeros(); 

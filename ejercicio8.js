@@ -5,4 +5,4 @@ function sumarPositivos(array) {
   }
   
   const miArray = [-1, 2, -3, 4, 5, -6];
-  console.log(sumarPositivos(miArray)); 
+  console.log("Suma de los positivos:", sumarPositivos(miArray)); 

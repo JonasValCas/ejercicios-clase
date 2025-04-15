@@ -3,4 +3,4 @@ function encontrarMultiploDeCinco(array) {
   }
   
   const miArray = [12, 22, 33, 45, 50];
-  console.log(encontrarMultiploDeCinco(miArray));
+  console.log("Primer múltiplo de 5 encontrado:", encontrarMultiploDeCinco(miArray));
